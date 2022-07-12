@@ -1,0 +1,29 @@
+<h4>Profile</h4>
+<hr>
+<div class="row text-center">
+    <div class="col-sm-6 border-end border-light">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Monthly Expense Limit:</p>
+            </div>
+            <div class="col-sm-6 bg-dark text-white">
+                <p class="fs-2 fw-bold"><%=number_to_currency(current_user.monthly_limit)%></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h6 class="lead">Change Limit</h6>
+        <hr>
+        <form action="/user/monthly" method="PATCH">
+            <%form_authenticity_token%>
+            <div class="row">
+                <div class="col-sm-6">
+                    <%=select_tag(:user,options_for_select([[number_to_currency(1000), 1000],[number_to_currency(2000), 2000],[number_to_currency(3000), 3000],[number_to_currency(4000), 4000],[number_to_currency(5000), 5000]]),class:'form-select',name:'user[monthly_limit]')%>
+                </div>
+                <div class="col-sm-6">
+                    <input type="submit" value="Change" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

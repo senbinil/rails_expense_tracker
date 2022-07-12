@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tracker</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="nav justify-content-center align-items-center mt-2">
+      <a class="display-2 mx-3 text-white text-uppercase" href="/">Expense Tracker</a>
+      <%if user_signed_in?%>
+      <%=button_to 'Logout' , destroy_user_session_path,class:'btn btn-outline-light',method: :delete%>
+      <%end%>
+    </nav>
+  
+      <%if flash[:status] %>
+        <div class="alert w-50 m-auto alert-light text-center fs-4 fw-bold">
+          <%=flash[:status]%>
+        </div>
+      <%end%>
+    <div class="container my-2">
+    <%= yield %>
+    </div>
+  </body>
+</html>
