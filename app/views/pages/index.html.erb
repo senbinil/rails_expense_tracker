@@ -30,15 +30,17 @@
             <div class="my-3">
                 <h4 class="lead border-bottom  text-white border-white">Expense Analysis</h4>
                 <div class="row text-white">
-                    <div class="col-sm-6">
+                    <%if @avg_expense %>
+                    <div class="col-sm-6 col-md-12 col-lg-6">
                        <div class="row">
                         <div class="fs-2">AVG EXP</div>
-                        <div class="display-1"><%=number_to_currency(@avg_expense)%></div>
+                        <div class="display-3"><%=number_to_currency(@avg_expense)%></div>
                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="fs-2 text-uppercase">Monthly Limit</div>
-                        <div class="display-1"><%=number_to_currency(current_user.monthly_limit)%></div>
+                    <%end%>
+                    <div class="col-sm-6 col-md-12 col-lg-6">
+                        <div class="fs-2 text-uppercase">Daily Limit</div>
+                        <div class="display-3"><%=number_to_currency(current_user.daily_limit)%></div>
                     </div>
                 </div>
             </div>
@@ -52,7 +54,7 @@
                 <div class="text-end">
                     <div class="d-flex justify-content-between">
                         <div class="total">
-                            <%if expense.total>=current_user.monthly_limit%>
+                            <%if expense.total>=current_user.daily_limit%>
                             <button class="btn btn-warning"><%=number_to_currency(expense.total)%></button>
                             <%else%>
                             <button class="btn btn-light"><%=number_to_currency(expense.total)%></button>
@@ -65,7 +67,9 @@
                     <ul class="list-group my-1">
                         <%expense.items.each do |item| %>
                         <li class="list-group-item d-flex text-capitalize justify-content-between align-items-center">
-                            <%=item.expense_name%>
+                            <div class="text-start">
+                                <%=item.expense_name%>
+                            </div>
                            <div>
                             <span class="badge bg-primary badge-pill">
                                 <%=number_to_currency(item.amount)%>

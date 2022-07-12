@@ -16,4 +16,6 @@
 @import "bootstrap";
 body{
     background: url(image-path('bg.svg')) no-repeat;
+    background-size: cover;
+    height: 100vh;
 }
